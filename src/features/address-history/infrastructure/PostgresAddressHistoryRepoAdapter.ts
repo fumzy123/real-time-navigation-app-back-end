@@ -1,4 +1,4 @@
-import { db } from "../../../index";
+import { db } from "../../../db";
 import {
   addressHistory,
   DbAddressHistory,
@@ -25,7 +25,7 @@ export class PostgresAddressHistoryRepoAdapter
    */
   async createAddressHistory(
     addressHistoryData: NewAddressHistory
-  ): Promise<void> {
+  ): Promise<DbAddressHistory> {
     // 1. Check if the address already exists (using addressText)
     const existing = await this.db
       .select()
@@ -45,16 +45,29 @@ export class PostgresAddressHistoryRepoAdapter
           latitude: addressHistoryData.latitude,
         })
         .where(eq(addressHistory.id, existing[0].id));
+
+      // Return the updated record
+      const updated = await this.db
+        .select()
+        .from(addressHistory)
+        .where(eq(addressHistory.id, existing[0].id))
+        .limit(1);
+
+      return updated[0];
     } else {
-      // 3. If new, insert the record
-      await this.db.insert(addressHistory).values({
-        addressText: addressHistoryData.addressText,
-        longitude: addressHistoryData.longitude,
-        latitude: addressHistoryData.latitude,
-        lastUsed: new Date(),
-      });
+      // 3. If new, insert the record and return it
+      const inserted = await this.db
+        .insert(addressHistory)
+        .values({
+          addressText: addressHistoryData.addressText,
+          longitude: addressHistoryData.longitude,
+          latitude: addressHistoryData.latitude,
+          lastUsed: new Date(),
+        })
+        .returning(); // Drizzle ORM supports returning inserted rows
+
+      return inserted[0];
     }
-    // Returns void as required by the port interface.
   }
 
   /**

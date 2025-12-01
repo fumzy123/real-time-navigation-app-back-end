@@ -6,7 +6,7 @@ import {
 export interface AddressHistoryRepository {
   createAddressHistory(
     addressHistory: NewAddressHistory
-  ): Promise<void>;
+  ): Promise<DbAddressHistory>;
   getLatestAddressHistory(limit: number): Promise<DbAddressHistory[]>;
   //   deleteAddressHistory(id: string): Promise<void>;
 }
