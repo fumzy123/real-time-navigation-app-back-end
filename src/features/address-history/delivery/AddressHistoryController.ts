@@ -14,6 +14,7 @@ router.post("/", async (req: Request, res: Response) => {
   try {
     // Extract required fields from the request body
     const { addressText, longitude, latitude } = req.body;
+    console.log(addressText, longitude, latitude);
 
     // Type checking and basic validation for the input data
     if (
@@ -59,6 +60,7 @@ router.get("/", async (req: Request, res: Response) => {
     const limit = req.query.limit
       ? parseInt(req.query.limit as string, 10)
       : 10;
+    console.log(req.query.limit);
 
     if (isNaN(limit) || limit < 1) {
       return res
