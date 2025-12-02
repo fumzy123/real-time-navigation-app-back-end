@@ -1,0 +1,11 @@
+meta {
+  name: Get Latest Address
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{base-url}}/api/addressHistory
+  body: none
+  auth: inherit
+}
