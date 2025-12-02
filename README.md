@@ -4,6 +4,12 @@
 
 **Real-Time Navigation App Back-End** provides the server-side infrastructure for the navigation application. Built in TypeScript with Express, it offers RESTful APIs, connects to a PostgreSQL database, manages environment configuration, and leverages Drizzle ORM for database operations. This backend serves as the data layer to support location-based features, route calculations, and persistent user data.
 
+### Screenshots
+
+![home](./docs/screenshot/home.png)
+![create-address](./docs/screenshot/create-address.png)
+![get-latest-address](./docs/screenshot/get-latest-address.png)
+
 ## Features
 
 ### 🌟 Core Features
@@ -88,20 +94,13 @@ npm install
 npm run dev
 ```
 
-#### Production
-
-```bash
-npm run build
-npm start
-```
-
 ### Environment Variables
 
 Create a `.env` file in your project root and provide required values, for example:
 
 ```
 DATABASE_URL=postgres://<user>:<password>@localhost:5432/<database>
-PORT=4000
+PORT=3000
 ```
 
 ---
@@ -119,6 +118,7 @@ PORT=4000
 ```
 real-time-navigation-app-back-end/
 ├── src/
+|   |--- features
 │   └── index.ts            # Entry point for the backend application
 ├── drizzle.config.ts       # Configuration for Drizzle ORM
 ├── drizzle/                # (Likely) contains migration files and ORM schema
@@ -127,29 +127,3 @@ real-time-navigation-app-back-end/
 ├── .gitignore
 └── README.md
 ```
-
----
-
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes.
-4. Push your branch (`git push origin feature/my-feature`)
-5. Open a pull request.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) if available for more information.
-
----
-
-## License
-
-This project is licensed under ISC. See the [LICENSE](LICENSE) file for details.
-
-## Maintainers
-
-- [fumzy123](https://github.com/fumzy123)
-
-For support or feedback, open an [Issue](https://github.com/fumzy123/real-time-navigation-app-back-end/issues).
-
----
